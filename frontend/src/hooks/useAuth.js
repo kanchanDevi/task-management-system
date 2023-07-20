@@ -5,23 +5,16 @@ export default () => {
   const [auth, setAuth] = useState();
 
   const verifyAuth = async () => {
-    try {
-      const res = await axios.get('/api/auth/is_logged_in');
-      return res.data;
-    } catch (err) {
-      console.log(err);
-      return false;
-    }
+    const isLoggedIn = await axios.get(`/api/auth/is_logged_in`);
+    setAuth(isLoggedIn.data);
+    return isLoggedIn.data;
   };
 
   useEffect(() => {
-    (
-      async () => {
-        const data = await verifyAuth();
-        setAuth(data);
-      }
-    )();
+    verifyAuth();
   }, []);
+
+ 
 
   return { auth };
 };
