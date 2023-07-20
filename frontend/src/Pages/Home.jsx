@@ -7,13 +7,12 @@ import classes from './Home.module.scss';
 
 const Home = () => {
   return (
-    <div className={classes.container}>
-
-<Navbar />
+   
 <Layout>
+<Navbar />
+
 <TaskList/>
 </Layout>
-</div>
     )
 }
 
