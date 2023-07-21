@@ -1,10 +1,10 @@
-import React from "react";
-import { Router, Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import Home from "./pages/Home";
-import EditProfile from "./Pages/EditProfile";
-import Auth from "./Pages/Auth";
-import PrivateRoutes from "./components/privateRoutes";
+import React from 'react';
+import { Toaster } from 'react-hot-toast';
+import { Route, Routes } from 'react-router-dom';
+import PrivateRoutes from './components/PrivateRoutes';
+import Auth from './pages/Auth';
+import EditProfile from './pages/EditProfile';
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -13,16 +13,15 @@ function App() {
         position="top-right"
         toastOptions={{
           style: {
-            fontSize: "1.8rem",
+            fontSize: '1.8rem',
           },
         }}
-      ></Toaster>
+      />
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Home />} />
           <Route path="/edit-profile" element={<EditProfile />} />
         </Route>
-
         <Route path="/auth" element={<Auth />} />
       </Routes>
     </>
