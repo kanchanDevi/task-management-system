@@ -1,11 +1,19 @@
-import React from 'react';
-import classes from './AuthForm.module.scss';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
+import classes from './AuthForm.module.scss';
 
-const Login = () => {
+function Login() {
+  const { verifyAuth, auth } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth) {
+      navigate('/');
+    }
+  }, [auth]);
 
   const login = async (e) => {
     e.preventDefault();
@@ -16,9 +24,11 @@ const Login = () => {
         email,
         password,
       });
+      await verifyAuth();
       navigate('/');
     } catch (err) {
       console.log(err);
+      verifyAuth();
     }
   };
   return (
@@ -46,4 +56,4 @@ const Login = () => {
   );
 }
 
-export default Login
+export default Login;
