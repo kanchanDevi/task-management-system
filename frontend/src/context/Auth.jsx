@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
       setAuth(data);
     }
   )();
-  }, []);
+  });
 
   return (
     <AuthContext.Provider value={{ auth, verifyAuth }}>
