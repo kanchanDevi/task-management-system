@@ -9,7 +9,7 @@ export default defineConfig({
   server:{
     proxy:{
       '/api': {
-        target: 'https://crud-jgvc.onrender.com', // Replace with your remote backend URL
+        target: 'https://s-ga4y.onrender.com', // Replace with your remote backend URL
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
