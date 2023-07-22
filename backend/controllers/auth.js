@@ -1,7 +1,7 @@
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
-import { createError } from '../Utils/createError.js';
+import createError  from '../Utils/createError.js';
 
 export const login = async (req, res, next) => {
   if (!req.body.email || !req.body.password) {
