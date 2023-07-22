@@ -1,42 +1,53 @@
+// app.js (or index.js) - Your main application file
+
 import express from 'express';
-import cors from 'cors'
+import cors from 'cors';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
-import allRoutes from './routes/index.js'
-// import userRoutes from './routes/users.js'
-import 'dotenv/config'
+import allRoutes from './routes/index.js';
+import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
-const PORT=process.env.PORT || 8080;
-const app=express()
+// Load environment variables from .env file
+dotenv.config();
 
-//middleware
+const PORT = process.env.PORT || 8080;
+const mongoURI = process.env.DB_CONNECTION_STRING;
 
-app.use(cors())
-app.use(morgan('tiny'))
-app.use(express.json())
-app.use(cookieParser())
-//routes
+const app = express();
 
+// Middleware
+app.use(cors());
+app.use(morgan('tiny'));
+app.use(express.json());
+app.use(cookieParser());
+
+// Routes
 app.use('/api', allRoutes);
 
-app.use((err, res, req) => {
-    const status = err.statusCode || 500;
-    const message = err.message || 'Internal Server Error';
-    return res.status(status).json({ message, stack: err.stack });
-  });
+// Error handling middleware
+app.use((err, req, res, next) => {
+  const status = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  return res.status(status).json({ message, stack: err.stack });
+});
 
-const connectDB=async()=>{
-    try{
-        await mongoose.connect(process.env.DB_CONNECTION_STRING);
-        console.log("mongo db connected")
-    }catch(err){
-        console.log(err.message);
-        process.exit(1);
-    }
-}
+// Connect to MongoDB
+const connectDB = async () => {
+  try {
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-app.listen(PORT, ()=>{
-    connectDB();
-    console.log(`server is running at port ${PORT}`)
-})
+    console.log('Connected to MongoDB');
+  } catch (err) {
+    console.error('Error connecting to MongoDB:', err.message);
+    process.exit(1);
+  }
+};
+
+app.listen(PORT, () => {
+  connectDB();
+  console.log(`Server is running at port ${PORT}`);
+});
