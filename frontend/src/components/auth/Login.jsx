@@ -9,11 +9,7 @@ function Login() {
   const { verifyAuth, auth } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (auth) {
-      navigate('/');
-    }
-  }, [auth]);
+  
 
   const login = async (e) => {
     e.preventDefault();

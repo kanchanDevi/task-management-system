@@ -8,7 +8,6 @@ import TaskList from '../components/task/TaskList';
 
 function Home() {
   const [userData, setUserData] = useState();
-  const { verifyAuth } = useAuth();
 
   // const logout = async () => {
   //   await axios.get('/api/auth/logout');
