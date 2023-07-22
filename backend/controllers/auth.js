@@ -62,15 +62,15 @@ export const logout=(req, res)=>{
     return res.status(200).json("logout success")
 }
 
-export const is_logged_in =(req, res)=>{
-    const token=req.cookies.access_token;
-    if(!token){
-        return res.json(false);
+export const is_logged_in = async (req, res) => {
+    const token = req.cookies.access_token;
+    if (!token) {
+      return res.json(false);
     }
-    return jwt.verify(token, process.env.JWT_SECRET, (err)=>{
-        if(err){
-            return res.json(false);
-        }
-        return res.json(true);
-    })
-}
+    return jwt.verify(token, process.env.JWT_SECRET, (err) => {
+      if (err) {
+        return res.json(false);
+      }
+      return res.json(true);
+    });
+  };
