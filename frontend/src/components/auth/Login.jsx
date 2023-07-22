@@ -24,11 +24,11 @@ function Login() {
         email,
         password,
       });
-      await verifyAuth();
+      await verifyAuth()
       navigate('/');
     } catch (err) {
       console.log(err);
-      verifyAuth();
+      await verifyAuth()
     }
   };
   return (

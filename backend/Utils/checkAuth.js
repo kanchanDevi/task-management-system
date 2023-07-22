@@ -1,16 +1,17 @@
-import jwt from 'jsonwebtoken';
-import createError from '../Utils/createError.js';
+import jwt from "jsonwebtoken";
+import  createError  from "../Utils/createError.js";
 
-export default (req, res, next) => {
+export const checkAuth = (req, res, next) => {
   const token = req.cookies.access_token;
-  if (!token) {
-    return next(createError({ status: 401, message: 'Unauthorized' }));
+  if(!token) {
+    return next(createError({ status: 401, message: "Unauthorized" })); 
   }
-  return jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return next(createError({ status: 401, message: 'Unauthorized, invalid token' }));
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if(err){
+      return next(createError({ status: 401, message: "Unauthorized, invalid token" })); 
+    }else{
+      req.user = decoded;
+      next();
     }
-    req.user = decoded;
-    return next();
-  });
-};
+  })
+}

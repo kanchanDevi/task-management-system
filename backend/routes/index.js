@@ -2,7 +2,7 @@ import express from 'express';
 import taskRoute from './tasks.js';
 import authRoute from './auth.js';
 import usersRoute from './users.js';
-import checkAuth from  '../Utils/checkAuth.js';
+import {checkAuth} from  '../Utils/checkAuth.js';
 
 const router=express.Router();
 
