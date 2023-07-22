@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-
+import toast from 'react-hot-toast';
 import classes from './AuthForm.module.scss';
 
 function Login() {
@@ -10,6 +10,8 @@ function Login() {
   const navigate = useNavigate();
 
   
+
+
 
   const login = async (e) => {
     e.preventDefault();
@@ -21,9 +23,12 @@ function Login() {
         password,
       });
       await verifyAuth()
+
       navigate('/');
+
     } catch (err) {
       console.log(err);
+
       await verifyAuth()
     }
   };
