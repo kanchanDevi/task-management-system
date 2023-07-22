@@ -6,6 +6,7 @@ import Auth from './Pages/Auth';
 import EditProfile from './Pages/EditProfile';
 import Home from './Pages/Home';
 
+
 function App() {
   return (
     <>

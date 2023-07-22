@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import classes from './AuthForm.module.scss';
 
+
 function Login() {
   const { verifyAuth, auth } = useAuth();
   const navigate = useNavigate();

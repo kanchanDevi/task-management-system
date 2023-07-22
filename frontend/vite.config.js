@@ -8,10 +8,11 @@ export default defineConfig({
   plugins: [react()],
   server:{
     proxy:{
-      '/api':{
-        target:'http://localhost:8080'
-
-      }
+      '/api': {
+        target: 'https://crud-jgvc.onrender.com', // Replace with your remote backend URL
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
     }
   }
 })

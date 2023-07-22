@@ -10,7 +10,7 @@ import cookieParser from 'cookie-parser';
 
 // Load environment variables from .env file
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 const mongoURI = process.env.DB_CONNECTION_STRING;
 
 const app = express();
