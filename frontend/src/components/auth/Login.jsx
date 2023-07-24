@@ -21,7 +21,7 @@ function Login() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     try {
-      await axios.post(`${URL}/api/auth/login`, {
+      await axios.post(`https://crud-application-xzy7.onrender.com/api/auth/login`, {
         email,
         password,
       });
@@ -29,9 +29,13 @@ function Login() {
       navigate('/');
     } catch (err) {
       console.log(err);
-       verifyAuth();
+       await verifyAuth();
     }
   };
+
+  
+
+
   return (
     <div className={classes.register}>
       <h1 className={classes.title}>Login</h1>

@@ -9,14 +9,18 @@ export function AuthProvider({ children }) {
 
   const verifyAuth = async () => {
     try {
-      const isLoggedIn = await axios.get(`${URL}/api/auth/is_logged_in`);
-      setAuth(isLoggedIn.data);
-      return isLoggedIn.data;
+      const res = await axios.get(`${URL}/api/auth/is_logged_in`);
+      const resp=res.json()
+      setAuth(resp);
+      return resp;
     } catch (err) {
       console.error("Error while verifying auth:", err);
+      // Handle the error as needed, e.g., set auth to false or show an error message.
+      setAuth(false);
       return false;
     }
   };
+  
   
   useEffect(() => {
    verifyAuth()
