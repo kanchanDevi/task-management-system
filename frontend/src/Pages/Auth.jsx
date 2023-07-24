@@ -8,6 +8,7 @@ import classes from './Auth.module.scss';
 
 
 const Auth = () => {
+
   return (
     <Layout>
       <div className={classes.form_container}>

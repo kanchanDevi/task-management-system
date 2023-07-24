@@ -7,23 +7,14 @@ export function AuthProvider({ children }) {
   const [auth, setAuth] = useState();
 
   const verifyAuth = async () => {
-   try{
-    const isLoggedIn = await axios.get('/api/auth/is_logged_in');
-   return isLoggedIn.data;
-   }catch(err){
-    console.log(err);
-    return false;
-   }
+    const isLoggedIn = await axios.get(`/api/auth/is_logged_in`);
+    setAuth(isLoggedIn.data);
+    return isLoggedIn.data;
   };
 
   useEffect(() => {
-  (
-    async ()=>{
-      const data=await verifyAuth();
-      setAuth(data);
-    }
-  )();
-  });
+    verifyAuth();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ auth, verifyAuth }}>

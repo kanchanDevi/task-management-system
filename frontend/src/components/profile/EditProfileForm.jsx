@@ -34,7 +34,7 @@ function EditProfileForm() {
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put('/api/users/me', user);
+      const res = await axios.put('http://localhost:8080/api/users/me', user);
       toast.success('Profile updated successfully');
       setUser(res.data);
     } catch (err) {

@@ -2,17 +2,18 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import toast from 'react-hot-toast';
-import classes from './AuthForm.module.scss';
 
+import classes from './AuthForm.module.scss';
 
 function Login() {
   const { verifyAuth, auth } = useAuth();
   const navigate = useNavigate();
 
-  
-
-
+  useEffect(() => {
+    if (auth) {
+      navigate('/');
+    }
+  }, [auth]);
 
   const login = async (e) => {
     e.preventDefault();
@@ -23,14 +24,11 @@ function Login() {
         email,
         password,
       });
-      await verifyAuth()
-
+      await verifyAuth();
       navigate('/');
-
     } catch (err) {
       console.log(err);
-
-      await verifyAuth()
+      verifyAuth();
     }
   };
   return (

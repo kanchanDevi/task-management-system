@@ -57,7 +57,7 @@ function TaskList() {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`/api/tasks/${id}`);
+      await axios.delete(`https://st-wxgr.onrender.com/api/tasks/${id}`);
       toast.success('Task deleted');
       setTaskList(taskList.filter((task) => task._id !== id));
     } catch (err) {
