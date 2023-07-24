@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 
 import TaskItem from './TaskItem';
 import classes from './TaskList.module.scss';
+import { URL } from '../../context/Url';
 
 function TaskList() {
   const [taskList, setTaskList] = useState([]);
@@ -15,7 +16,7 @@ function TaskList() {
 
   const getTasks = async () => {
     try {
-      const { data } = await axios.get('/api/tasks/mytasks');
+      const { data } = await axios.get(`${URL}/api/tasks/mytasks`);
       setTaskList(
         data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
       );
@@ -40,7 +41,7 @@ function TaskList() {
       return;
     }
     try {
-      const { data } = await axios.post('/api/tasks/', {
+      const { data } = await axios.post(`${URL}/api/tasks/`, {
         title: newTask,
         description: newTaskDescription,
       });
@@ -57,7 +58,7 @@ function TaskList() {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`https://st-wxgr.onrender.com/api/tasks/${id}`);
+      await axios.delete(`${URL}/api/tasks/${id}`);
       toast.success('Task deleted');
       setTaskList(taskList.filter((task) => task._id !== id));
     } catch (err) {

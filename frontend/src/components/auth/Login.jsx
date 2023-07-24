@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-
+import { URL } from '../../context/Url';
 import classes from './AuthForm.module.scss';
 
 function Login() {
@@ -13,6 +13,7 @@ function Login() {
     if (auth) {
       navigate('/');
     }
+    
   }, [auth]);
 
   const login = async (e) => {
@@ -20,7 +21,7 @@ function Login() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     try {
-      await axios.post('/api/auth/login', {
+      await axios.post(`${URL}/api/auth/login`, {
         email,
         password,
       });
@@ -28,7 +29,7 @@ function Login() {
       navigate('/');
     } catch (err) {
       console.log(err);
-      verifyAuth();
+       verifyAuth();
     }
   };
   return (

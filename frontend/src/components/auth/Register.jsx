@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { URL } from '../../context/Url';
 
 import classes from './AuthForm.module.scss';
 
@@ -13,7 +14,7 @@ function Register() {
       password: e.target.password.value,
     };
     try {
-      await axios.post('/api/auth/register', user);
+      await axios.post(`${URL}/api/auth/register`, user);
       toast.success('Registered successfully');
     } catch (err) {
       console.log(err);

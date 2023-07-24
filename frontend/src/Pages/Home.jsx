@@ -5,9 +5,11 @@ import useAuth from '../hooks/useAuth';
 import Layout from '../components/Layout';
 import Navbar from '../components/nav/Navbar';
 import TaskList from '../components/task/TaskList';
+import { URL } from '../context/Url';
 
 function Home() {
   const [userData, setUserData] = useState();
+  const { verifyAuth } = useAuth();
 
   // const logout = async () => {
   //   await axios.get('/api/auth/logout');
@@ -16,7 +18,7 @@ function Home() {
 
   const getUserInfo = async () => {
     try {
-      const { data } = await axios.get(`/api/users/me`);
+      const { data } = await axios.get(`${URL}/api/users/me/info`);
       setUserData(data);
     } catch (err) {
       if (err.status === 401) {

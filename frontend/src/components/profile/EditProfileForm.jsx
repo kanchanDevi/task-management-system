@@ -4,6 +4,7 @@ import { BsArrowLeftShort } from 'react-icons/bs';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import classes from './EditProfileForm.module.scss';
+import { URL } from '../../context/Url';
 
 function EditProfileForm() {
   const [user, setUser] = useState({
@@ -15,7 +16,7 @@ function EditProfileForm() {
     (
       async () => {
         try {
-          const { data } = await axios.get('/api/users/me');
+          const { data } = await axios.get(`${URL}/api/users/me`);
           setUser(data);
         } catch (err) {
           console.log(err);
@@ -34,7 +35,7 @@ function EditProfileForm() {
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put('http://localhost:8080/api/users/me', user);
+      const res = await axios.put(`${URL}/api/users/me`, user);
       toast.success('Profile updated successfully');
       setUser(res.data);
     } catch (err) {

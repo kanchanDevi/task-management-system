@@ -5,7 +5,11 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './styles/global.scss';
 import { AuthProvider } from './context/Auth';
+import getApiBaseUrl from './utils/getApiBaseUrl';
 
+
+// axios.defaults.withCredentials = true;
+axios.defaults.baseURL = getApiBaseUrl();
 
 
 
