@@ -23,19 +23,7 @@ console.log(allowedDomains);
 
 // middleware
 app.use(
-  cors({
-    credentials: true,
-    origin(origin, callback) {
-      // bypass the requests with no origin (like curl requests, mobile apps, etc )
-      if (!origin) return callback(null, true);
-
-      if (allowedDomains.indexOf(origin) === -1) {
-        const msg = `This site ${origin} does not have an access. Only specific domains are allowed to access it.`;
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
-  }),
+  cors(),
 );
 
 
@@ -47,10 +35,17 @@ app.use(cookieParser());
 app.use('/api', allRoutes);
 
 // Error handling middleware
-app.use((err, req, res) => {
+app.use((err, req, res,next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  // Set this header to true if you need to send credentials
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  
   const status = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
   return res.status(status).json({ message, stack: err.stack });
+  next();
 });
 
 // Connect to MongoDB
