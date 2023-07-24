@@ -8,7 +8,7 @@ import { AuthProvider } from './context/Auth';
 import getApiBaseUrl from './utils/getApiBaseUrl';
 
 
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 axios.defaults.baseURL = getApiBaseUrl();
 
 

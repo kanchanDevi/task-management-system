@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   const verifyAuth = async () => {
     try {
       const res = await axios.get(`${URL}/api/auth/is_logged_in`);
-      const resp=res.json()
+      const resp=res.data
       setAuth(resp);
       return resp;
     } catch (err) {
